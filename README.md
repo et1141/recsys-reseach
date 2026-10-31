@@ -1,12 +1,31 @@
 # Recommendation research workspace
 
+## Run Multica
+
+Double-click **Start-Multica.cmd**, or run it from any terminal:
+
+```powershell
+C:\Users\adria\Files\recsys-research\Start-Multica.cmd
+```
+
+Prerequisites: Docker Desktop with Linux containers and Node.js (already available here).
+The launcher starts Docker Desktop if needed, builds the existing Multica source using
+Docker, starts PostgreSQL/API/web, waits for database migrations and web readiness, and
+opens the app. Subsequent launches reuse configuration, Docker build caches and database
+volumes. No host Go installation is needed to start the Multica service.
+
+Use `Start-Multica.cmd --stop` to stop without deleting data, `--logs` to inspect logs,
+or `--no-open` to skip opening the browser. First use still requires account/workspace
+creation and the agent-runtime setup below; the launcher does not supply coding credentials.
+The command file uses Node.js directly, so it does not execute a PowerShell script file.
+
 **Prepared, but not running yet.** The existing Multica checkout is clean at
 `e8ae72c9dfc1b4474b61a9087f51b33cbee6a048`. This session could not reach package
 servers, find Docker/Go/uv, or access WSL. No Multica services or agents have been
 created on a running server, no upstream skills downloaded, and no training run performed.
 `uv.lock` must still be generated and validated; dependency compatibility is unverified.
-The current PowerShell execution policy also blocks running `.ps1` files. Use a host
-where these reviewed scripts are permitted; parsing them here did not execute them.
+The current PowerShell execution policy blocks the optional `.ps1` research/backup
+utilities. The Multica startup command no longer depends on those utilities.
 
 Open **notes/** as an Obsidian vault and start at [Home](notes/Home.md).
 One experiment note holds the question, evidence links, review and decision.
@@ -29,15 +48,16 @@ setup. No Slack messages or scheduled jobs are enabled by this package.
 
 ## Complete host setup
 
-These steps need an ordinary terminal with network access. Install Docker Desktop with
-Linux containers (or use a Linux server with Docker Compose v2), Git, uv, and Go matching
-the inspected Multica checkout's `server/go.mod`. Authenticate your chosen coding CLI.
+These one-time research-agent steps need an ordinary terminal with network access.
+In addition to the Docker startup prerequisites above, install Git, uv, and Go matching
+the inspected Multica checkout's `server/go.mod` to build the host CLI. Authenticate your
+chosen coding CLI. These are agent-runtime requirements, not everyday server startup steps.
 
 On Windows, from this directory:
 
 ```powershell
 # Builds the existing source; generates secrets only when .env is absent.
-./setup/Start-Multica.ps1
+./Start-Multica.cmd
 
 # Build the CLI from the same checkout as the server; avoids release/main mismatch.
 New-Item -ItemType Directory -Force .local | Out-Null
@@ -144,6 +164,10 @@ available bundled Python 3.12, not the pending Python 3.11 research environment.
 
 Not verified: dependency resolution, Ruff/pytest under uv, container build/readiness,
 CLI provisioning against a live server, training, W&B sync, Slack, reboot or restore.
+
+Docker launcher: `node --test setup/start-multica.test.mjs` checks fresh secrets,
+database credential consistency, incompatible templates and actual localhost port parsing.
+Full startup remains blocked until Docker Desktop is installed and accessible.
 
 Sources: [self hosting](https://multica.ai/docs/self-host-quickstart),
 [Squads](https://multica.ai/docs/squads), [skills](https://multica.ai/docs/skills),
