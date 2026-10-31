@@ -35,7 +35,7 @@ def main() -> None:
     expected = "\n".join(rows) + "\n"
     if dataset_file.exists() and dataset_file.read_text(encoding="utf-8") != expected:
         raise RuntimeError("Existing toy dataset differs; refusing to overwrite")
-    dataset_file.write_text(expected, encoding="utf-8")
+    dataset_file.write_text(expected, encoding="utf-8", newline="\n")
     config = Config(config_file_list=[str(ROOT / "configs/recbole-smoke.yaml")],
                     config_dict={"checkpoint_dir": str(output), "log_wandb": False})
     init_seed(config["seed"], config["reproducibility"])

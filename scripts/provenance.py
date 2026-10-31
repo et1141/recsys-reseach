@@ -19,7 +19,7 @@ def sha256(path: Path) -> str:
 
 def write_json(path: Path, content: Any) -> None:
     path.write_text(json.dumps(content, indent=2, default=str, allow_nan=False) + "\n",
-                    encoding="utf-8")
+                    encoding="utf-8", newline="\n")
 
 
 def require_reproducible_checkout(root: Path) -> str:
