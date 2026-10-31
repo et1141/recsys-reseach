@@ -1,0 +1,26 @@
+[project]
+name = "recsys-research"
+version = "0.1.0"
+description = "Framework-neutral reproducible recommendation research"
+requires-python = ">=3.11,<3.12"
+dependencies = ["wandb>=0.19,<1", "pyyaml>=6,<7", "numpy>=1.24,<2"]
+
+[project.optional-dependencies]
+recbole = ["recbole==1.2.1", "torch==2.5.1", "scipy>=1.10,<1.13", "ray[tune]>=2.9,<3", "kmeans-pytorch==0.3", "tensorboard>=2.14,<3"]
+torch = ["torch==2.5.1"]
+lightning = ["torch==2.5.1", "lightning>=2.4,<2.6"]
+
+[dependency-groups]
+dev = ["ruff>=0.9,<1", "pytest>=8,<9", "mypy>=1.14,<2"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+ignore_missing_imports = true

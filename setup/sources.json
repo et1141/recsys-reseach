@@ -1,0 +1,26 @@
+{
+  "repositories": {
+    "agency": "https://github.com/msitarzewski/agency-agents.git",
+    "agents": "https://github.com/wshobson/agents.git",
+    "science": "https://github.com/K-Dense-AI/scientific-agent-skills.git",
+    "python": "https://github.com/trailofbits/skills.git"
+  },
+  "identities": {
+    "coordinator": ["agency", "project-management/project-management-project-shepherd.md"],
+    "researcher": ["agents", "plugins/machine-learning-ops/agents/data-scientist.md"],
+    "implementer": ["agents", "plugins/machine-learning-ops/agents/ml-engineer.md"],
+    "reviewer": ["agents", "plugins/comprehensive-review/agents/code-reviewer.md"]
+  },
+  "skills": {
+    "scientific-brainstorming": ["science", "skills/scientific-brainstorming"],
+    "literature-review": ["science", "skills/literature-review"],
+    "peer-review": ["science", "skills/peer-review"],
+    "modern-python": ["python", "plugins/modern-python/skills/modern-python"]
+  },
+  "attachments": {
+    "coordinator": ["experiment-notes", "research-verification"],
+    "researcher": ["scientific-brainstorming", "literature-review", "experiment-notes"],
+    "implementer": ["modern-python", "experiment-notes", "research-verification"],
+    "reviewer": ["peer-review", "research-verification", "experiment-notes"]
+  }
+}

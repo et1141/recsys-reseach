@@ -1,0 +1,30 @@
+model: BPR
+dataset: toy
+data_path: data
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+TIME_FIELD: timestamp
+load_col:
+  inter: [user_id, item_id, timestamp]
+seed: 42
+reproducibility: true
+use_gpu: false
+epochs: 2
+train_batch_size: 64
+eval_batch_size: 256
+embedding_size: 8
+worker: 0
+show_progress: false
+log_wandb: false
+eval_args:
+  split: {RS: [0.8, 0.1, 0.1]}
+  group_by: user
+  order: RO
+  mode: full
+metrics: [Recall, NDCG, MRR]
+topk: [5, 10]
+valid_metric: NDCG@10
+stopping_step: 2
+train_neg_sample_args:
+  distribution: uniform
+  sample_num: 1
