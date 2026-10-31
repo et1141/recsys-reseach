@@ -5,6 +5,8 @@
 servers, find Docker/Go/uv, or access WSL. No Multica services or agents have been
 created on a running server, no upstream skills downloaded, and no training run performed.
 `uv.lock` must still be generated and validated; dependency compatibility is unverified.
+The current PowerShell execution policy also blocks running `.ps1` files. Use a host
+where these reviewed scripts are permitted; parsing them here did not execute them.
 
 Open **notes/** as an Obsidian vault and start at [Home](notes/Home.md).
 One experiment note holds the question, evidence links, review and decision.
